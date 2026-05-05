@@ -1,48 +1,3 @@
-# colored.zig
-
-A simple and easy to use library for colored output. Written with zig 0.14
-
-# Installation
-
-```sh
-# Version that works with zig 0.16
-zig fetch --save git+https://github.com/invra/colored.zig
-```
-
-Then add the following to `build.zig`:
-
-```zig
-const clap = b.dependency("colored", .{});
-exe.root_module.addImport("colored", clap.module("colored"));
-```
-
-# Examples
-
-## Hello World
-
-```zig
-const std = @import("std");
-const colored = @import("colored");
-
-pub fn main(init: std.process.Init) !void {
-    const io = init.io;
-
-    var buf: [128]u8 = undefined;
-    var file_writer = std.Io.File.stdout().writer(io, &buf);
-    const stdout: *std.Io.Writer = &file_writer.interface;
-
-    try colored.print(stdout, "Hello, World!\n", .{
-        .color = .{ .ansi = .brightRed },
-        .background = .{ .ansi = .black },
-        .styles = &.{ .bold, .underline },
-    });
-}
-
-```
-
-## Color palette
-
-```zig
 const std = @import("std");
 const colored = @import("colored");
 const RGB = colored.RGB;
@@ -83,5 +38,3 @@ pub fn main(init: std.process.Init) !void {
 
     try colored.print(stdout, "Orange\n", .{ .color = .{ .rgb = CatppuccinMocha.orange }, .styles = &.{ .italic, .strikethrough } });
 }
-
-```

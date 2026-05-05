@@ -1,19 +1,19 @@
-# prettyzig
+# colored.zig
 
 A simple and easy to use library for colored output. Written with zig 0.14
 
 # Installation
 
 ```sh
-# Version of prettyzig that works with zig 0.14
-zig fetch --save git+https://github.com/couchpotato007/prettyzig
+# Version that works with zig 0.16
+zig fetch --save git+https://github.com/invra/colored.zig
 ```
 
 Then add the following to `build.zig`:
 
 ```zig
-const clap = b.dependency("prettyzig", .{{}});
-exe.root_module.addImport("prettyzig", clap.module("prettyzig"));
+const clap = b.dependency("colored", .{{}});
+exe.root_module.addImport("colored", clap.module("colored"));
 ```
 
 # Examples
@@ -24,7 +24,7 @@ exe.root_module.addImport("prettyzig", clap.module("prettyzig"));
 {s}
 ```
 
-## Color pallete
+## Color palette
 
 ```zig
 {s}

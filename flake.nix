@@ -17,6 +17,7 @@
       in pkgs.mkShell {
         packages = with pkgs; [
           zig-overlay.packages.${system}.default
+          typos
           zls
         ];
       };
