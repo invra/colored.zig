@@ -3,26 +3,23 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    zig.url = "github:mitchellh/zig-overlay";
+    zig-overlay.url = "github:mitchellh/zig-overlay";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    zig,
-  }: let
-    system = "x86_64-linux";
-    lib = nixpkgs.lib;
-    pkgs = import nixpkgs {
-      inherit system;
-      overlays = [zig.overlays.default];
-    };
+  outputs = { nixpkgs, zig-overlay, ... }:
+  let
+    forEachAllSystems = f: nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed
+      (system: f { pkgs = import nixpkgs { inherit system; }; inherit zig-overlay; } );
   in {
-    devShells.${system}.default = pkgs.mkShell {
-      packages = with pkgs; [
-        zigpkgs.default
-        zls
-      ];
-    };
+    devShells = forEachAllSystems({pkgs, zig-overlay}: {
+      default = let
+        system = pkgs.stdenv.system;
+      in pkgs.mkShell {
+        packages = with pkgs; [
+          zig-overlay.packages.${system}.default
+          zls
+        ];
+      };
+    });
   };
 }

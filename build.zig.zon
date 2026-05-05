@@ -1,11 +1,7 @@
 .{
-    .fingerprint = 0x95080d897a32d8d9,
-
-    .name = .prettyzig,
-
-    .version = "0.0.0",
-
+    .fingerprint = 0xe437cf0d996fcc93,
+    .name = .colored,
+    .version = "1.0.0",
     .dependencies = .{},
-
     .paths = .{"."},
 }
