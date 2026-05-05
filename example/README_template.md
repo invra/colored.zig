@@ -12,8 +12,8 @@ zig fetch --save git+https://github.com/invra/colored.zig
 Then add the following to `build.zig`:
 
 ```zig
-const clap = b.dependency("colored", .{{}});
-exe.root_module.addImport("colored", clap.module("colored"));
+const colored_dep = b.dependency("colored", .{{}});
+exe.root_module.addImport("colored", colored_dep.module("colored"));
 ```
 
 # Examples
